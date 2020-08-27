@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tynrare</title>
+  </head>
+  <body>
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.min.css"
+    />
+  </body>
+  <script>
+    /**
+     * @param {string} link .
+     * @param {function} callback .
+     */
+    function load(link, callback) {
+      var file = new XMLHttpRequest();
+      file.open("GET", link, true);
+      file.onreadystatechange = function () {
+					console.log(link);
+        if (file.readyState === 4) {
+          // Makes sure the document is ready to parse
+          if (file.status === 200) {
+            // Makes sure it's found the file
+            callback(file.responseText);
+          }
+        }
+      };
+			file.send(null);
+    }
+  </script>
+  <script>
+    load(
+      "https://raw.githubusercontent.com/tynrare/tynrare/master/README.md",
+      function (text) {
+        var converter = new showdown.Converter(),
+          text = text,
+          html = converter.makeHtml(text);
+
+        const div = document.createElement("div");
+        div.innerHTML = html;
+        document.body.appendChild(div);
+      }
+    );
+  </script>
+</html>
