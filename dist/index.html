@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Tynrare</title>
+    <title>tynrare's page</title>
   </head>
   <body>
     <script
@@ -13,6 +13,30 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/gh/kognise/water.css@latest/dist/dark.min.css"
     />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Shader -->
+    <script
+      type="text/javascript"
+      src="https://rawgit.com/patriciogonzalezvivo/glslCanvas/master/dist/GlslCanvas.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.rawgit.com/github/fetch/master/fetch.js"
+    ></script>
+
+    <!-- Body -->
+    <canvas
+      id="glslCanvas"
+      data-fragment-url="static/text-dots_SimplePS.glsl"
+      width="800"
+      height="600"
+      data-textures="static/text.jpg, static/noise.jpg"
+    >
+    </canvas>
+    <div id="content-root">
+      <div id="content"></div>
+    </div>
   </body>
   <script>
     /**
@@ -23,7 +47,6 @@
       var file = new XMLHttpRequest();
       file.open("GET", link, true);
       file.onreadystatechange = function () {
-					console.log(link);
         if (file.readyState === 4) {
           // Makes sure the document is ready to parse
           if (file.status === 200) {
@@ -32,7 +55,7 @@
           }
         }
       };
-			file.send(null);
+      file.send(null);
     }
   </script>
   <script>
@@ -43,10 +66,14 @@
           text = text,
           html = converter.makeHtml(text);
 
-        const div = document.createElement("div");
-        div.innerHTML = html;
-        document.body.appendChild(div);
+        document.getElementById("content").innerHTML = html;
       }
     );
+  </script>
+  <script>
+    var canvas = document.getElementById("glslCanvas");
+    var shader = new GlslCanvas(canvas);
+    canvas.style.width = "100%";
+    canvas.style.height = "100%";
   </script>
 </html>
