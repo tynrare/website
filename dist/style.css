@@ -1,5 +1,6 @@
 body {
   background: #101515;
+  overflow: clip;
 }
 
 #glslCanvas {
