@@ -15,10 +15,13 @@ body {
   //perspective: 1000px;
 	position: absolute;
 	left: 3em;
+	height: 100%;
 }
 
 #content {
   padding: 3em 3em;
+  height: inherit;
+  overflow: auto;
   //border-radius: 0.5em;
   //background-color: #030710e6;
   //transform: rotate3d(1, 0, 0, 5deg);
